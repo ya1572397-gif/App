@@ -6,12 +6,11 @@
 <title>نفادل — حماية ذكية، تربية واعية</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -37,6 +36,7 @@ body {
   --text-soft: #A07850;
   --green: #2E7D32;
   --green-light: #E8F5E9;
+  --quran-bg: #FBF6EE;
   --gold: #B8860B;
   --gold-light: #E8A820;
 }
@@ -78,6 +78,7 @@ body {
   overflow-y: auto;
   flex: 1;
 }
+
 .scroll-area::-webkit-scrollbar {
   display: none;
 }
@@ -102,8 +103,10 @@ body {
   cursor: pointer;
   width: 100%;
   margin-bottom: 10px;
-  transition: transform 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 6px 18px rgba(184, 80, 10, 0.30);
 }
+
 .btn-primary:active {
   transform: scale(0.97);
 }
@@ -119,6 +122,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .btn-gold {
@@ -132,6 +136,15 @@ body {
   font-size: 16px;
   font-weight: 900;
   cursor: pointer;
+  box-shadow: 0 6px 20px rgba(184, 134, 11, 0.35);
+}
+
+.input-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-mid);
+  margin-bottom: 7px;
+  display: block;
 }
 
 .input-field {
@@ -141,14 +154,16 @@ body {
   border-radius: 18px;
   font-family: 'Tajawal', sans-serif;
   font-size: 16px;
+  color: var(--text-dark);
+  outline: none;
   text-align: right;
   direction: rtl;
   margin-bottom: 14px;
   background: var(--bg-cream);
 }
+
 .input-field:focus {
   border-color: var(--orange);
-  outline: none;
   background: white;
 }
 
@@ -161,20 +176,22 @@ body {
 }
 
 .otp-box {
-  width: 52px;
-  height: 60px;
+  width: 58px;
+  height: 66px;
   border: 2.5px solid #EDE0D4;
   border-radius: 18px;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   text-align: center;
   color: var(--orange);
   font-family: 'Tajawal', sans-serif;
+  outline: none;
   background: var(--bg-cream);
 }
+
 .otp-box:focus {
   border-color: var(--orange);
-  outline: none;
+  background: white;
 }
 
 .choice-card {
@@ -189,6 +206,7 @@ body {
   border: 2px solid transparent;
   transition: all 0.2s;
 }
+
 .choice-card:hover {
   border-color: var(--orange);
   background: var(--orange-pale);
@@ -204,6 +222,19 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 20px;
+  flex-shrink: 0;
+}
+
+.choice-text h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.choice-text p {
+  font-size: 12px;
+  color: var(--text-soft);
 }
 
 .device-card {
@@ -226,6 +257,19 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 18px;
+  flex-shrink: 0;
+}
+
+.device-info h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.device-info p {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 2px;
 }
 
 .status-badge {
@@ -235,33 +279,38 @@ body {
   padding: 4px 10px;
   border-radius: 20px;
 }
+
 .status-on {
   background: #E8F5E9;
   color: var(--green);
 }
+
 .status-off {
   background: #FFEBEE;
   color: #C62828;
 }
 
 .map-real {
-  background: #E8DDD0;
+  background: linear-gradient(135deg, #E8DDD0, #D8C8B8);
   border-radius: 18px;
   height: 200px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  position: relative;
   overflow: hidden;
 }
 
 #real-map {
   width: 100%;
   height: 100%;
+  border-radius: 18px;
 }
 
 .section-label {
   font-size: 11px;
   font-weight: 700;
   color: var(--text-soft);
-  margin: 14px 0 10px;
+  margin-bottom: 10px;
+  margin-top: 14px;
 }
 
 .screen-title {
@@ -277,6 +326,7 @@ body {
   color: var(--text-soft);
   text-align: center;
   margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .back-btn {
@@ -284,13 +334,14 @@ body {
   border: none;
   color: var(--orange);
   font-size: 14px;
-  font-weight: 700;
+  font-family: 'Tajawal', sans-serif;
   cursor: pointer;
+  font-weight: 700;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 6px;
   width: fit-content;
-  margin-bottom: 16px;
 }
 
 .toggle-row {
@@ -301,6 +352,18 @@ body {
   border-bottom: 1px solid #F0E8E0;
 }
 
+.toggle-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.toggle-sub {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
 .toggle {
   width: 48px;
   height: 26px;
@@ -308,7 +371,10 @@ body {
   border-radius: 50px;
   position: relative;
   cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
 }
+
 .toggle::after {
   content: '';
   position: absolute;
@@ -319,10 +385,13 @@ body {
   top: 3px;
   right: 3px;
   transition: right 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
+
 .toggle.off {
   background: #DDD;
 }
+
 .toggle.off::after {
   right: 25px;
 }
@@ -335,7 +404,19 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  border: 1px solid rgba(184, 80, 10, 0.15);
   cursor: pointer;
+}
+
+.notif-icon {
+  font-size: 18px;
+  color: var(--orange);
+}
+
+.notif-text {
+  font-size: 13px;
+  color: var(--text-mid);
+  font-weight: 600;
 }
 
 .tab-bar {
@@ -345,6 +426,7 @@ body {
   background: white;
   border-top: 1px solid #F0E8E0;
   margin: 0 -22px -18px;
+  flex-shrink: 0;
 }
 
 .tab-item {
@@ -355,11 +437,52 @@ body {
   cursor: pointer;
   opacity: 0.3;
   font-size: 10px;
+  color: var(--text-dark);
   font-weight: 600;
+  transition: opacity 0.2s;
 }
+
 .tab-item.active {
   opacity: 1;
   color: var(--orange);
+}
+
+.tab-icon {
+  font-size: 19px;
+}
+
+.feedback-area {
+  width: 100%;
+  min-height: 120px;
+  border: 2px solid #EDE0D4;
+  border-radius: 18px;
+  padding: 14px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 14px;
+  background: var(--bg-cream);
+}
+
+.switch-btn {
+  background: var(--gray);
+  color: var(--text-mid);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.spacer {
+  flex: 1;
 }
 
 .child-header {
@@ -367,40 +490,64 @@ body {
   padding: 46px 24px 18px;
   border-radius: 0 0 34px 34px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .child-avatar {
   width: 46px;
   height: 46px;
-  background: rgba(255,255,255,0.2);
+  color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.child-greeting .hi {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
 }
 
 .child-greeting .name {
   color: white;
   font-size: 19px;
   font-weight: 800;
+  text-align: center;
+}
+
+.time-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 24px 10px;
+}
+
+.time-label {
+  font-size: 12px;
+  color: var(--text-soft);
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .time-circle-wrap {
   position: relative;
   display: inline-block;
 }
+
 .time-circle-wrap svg {
   transform: rotate(-90deg);
 }
+
 .time-ring-bg {
   fill: none;
   stroke: #F0E0D4;
   stroke-width: 10;
 }
+
 .time-ring {
   fill: none;
   stroke: var(--orange);
@@ -409,6 +556,7 @@ body {
   stroke-dasharray: 283;
   stroke-dashoffset: 94;
 }
+
 .time-center {
   position: absolute;
   inset: 0;
@@ -417,10 +565,69 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .time-num {
   font-size: 34px;
   font-weight: 900;
   color: var(--orange);
+  line-height: 1;
+}
+
+.time-unit {
+  font-size: 12px;
+  color: var(--text-soft);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.time-sub {
+  font-size: 11px;
+  color: #BBB;
+  margin-top: 6px;
+}
+
+.status-bar {
+  display: flex;
+  gap: 10px;
+  padding: 0 22px;
+  margin-bottom: 12px;
+}
+
+.status-pill {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 11px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(184, 80, 10, 0.07);
+}
+
+.status-pill-icon {
+  font-size: 18px;
+  color: var(--orange);
+}
+
+.status-pill-text {
+  font-size: 11px;
+  color: var(--text-mid);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.status-pill-text b {
+  color: var(--orange);
+  font-size: 13px;
+  display: block;
+}
+
+.apps-label {
+  padding: 0 22px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-soft);
+  margin-bottom: 10px;
 }
 
 .apps-grid {
@@ -429,20 +636,37 @@ body {
   gap: 12px;
   padding: 0 22px;
 }
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
 .app-icon {
   width: 56px;
   height: 56px;
+  color: white;
   border-radius: 17px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
-  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s;
 }
+
+.app-icon:active {
+  transform: scale(0.9);
+}
+
 .app-name {
   font-size: 10px;
+  color: var(--text-mid);
+  font-weight: 600;
   text-align: center;
-  margin-top: 5px;
 }
 
 .dad-msg {
@@ -451,24 +675,45 @@ body {
   border-radius: 18px;
   padding: 13px 15px;
   display: flex;
+  align-items: center;
   gap: 12px;
+  box-shadow: 0 2px 12px rgba(184, 80, 10, 0.08);
   border-right: 4px solid var(--orange);
 }
 
+.dad-msg-text {
+  font-size: 12px;
+  color: var(--text-mid);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.dad-msg-text b {
+  color: var(--orange);
+}
+
 .request-btn {
-  margin: 8px 22px;
+  margin: 8px 22px 0;
   background: var(--orange);
   color: white;
   border: none;
   border-radius: 22px;
   padding: 14px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: 0 6px 20px rgba(184, 80, 10, 0.30);
+  transition: transform 0.15s;
   width: calc(100% - 44px);
+}
+
+.request-btn:active {
+  transform: scale(0.97);
 }
 
 .wird-banner {
@@ -477,8 +722,10 @@ body {
   border-radius: 22px;
   padding: 16px;
   display: flex;
+  align-items: center;
   gap: 14px;
   cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .wird-banner-icon {
@@ -490,176 +737,397 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 22px;
+  flex-shrink: 0;
 }
 
 .wird-banner-text h4 {
   color: var(--gold-light);
   font-size: 15px;
   font-weight: 800;
+  margin-bottom: 3px;
 }
 
-/* واجهة القرآن */
-.quran-reader {
-  background: linear-gradient(160deg, #1A0A00 0%, #2C1604 100%);
-  overflow-y: auto;
-}
-.verse-line {
-  padding: 12px;
-  margin: 8px 16px;
-  border-radius: 16px;
-  font-family: 'Amiri', serif;
-  font-size: 18px;
-  line-height: 1.8;
-  text-align: center;
-  color: #FFF8E7;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.verse-line.active {
-  background: rgba(184, 134, 11, 0.3);
-  border-right: 3px solid var(--gold);
-}
-.verse-line.completed {
-  background: rgba(46, 125, 50, 0.2);
-  color: #81C784;
-}
-.audio-bar {
-  width: 4px;
-  height: 8px;
-  background: var(--gold-light);
-  border-radius: 2px;
-  animation: audioWave 1.2s infinite ease-in-out;
-}
-.audio-bar:nth-child(2) { height: 16px; animation-delay: 0.15s; }
-.audio-bar:nth-child(3) { height: 12px; animation-delay: 0.3s; }
-.audio-bar:nth-child(4) { height: 20px; animation-delay: 0.45s; }
-@keyframes audioWave {
-  0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
-  50% { transform: scaleY(1.1); opacity: 1; }
-}
-
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-.popup-overlay.active {
-  display: flex;
-}
-.popup-box {
-  background: white;
-  border-radius: 32px;
-  padding: 28px;
-  width: 300px;
-  text-align: center;
-}
-.popup-code-digit {
-  display: inline-block;
-  width: 50px;
-  height: 55px;
-  background: var(--orange-pale);
-  border-radius: 14px;
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--orange);
-  line-height: 55px;
-  margin: 0 3px;
+.wird-banner-text p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
 }
 
 .video-modal {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
   z-index: 1000;
   display: none;
   align-items: center;
   justify-content: center;
 }
+
 .video-modal.active {
   display: flex;
 }
-.video-modal iframe {
+
+.video-modal-content {
   width: 90%;
-  height: 250px;
+  max-width: 400px;
+  background: #000;
   border-radius: 20px;
+  overflow: hidden;
+  position: relative;
 }
 
-.toast-msg {
+.video-modal iframe {
+  width: 100%;
+  height: 250px;
+  border: none;
+}
+
+.close-video {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 1001;
+}
+
+.popup-overlay {
   position: fixed;
-  bottom: 80px;
+  inset: 0;
+  background: rgba(26, 10, 0, 0.78);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-overlay.active {
+  display: flex;
+}
+
+.popup-box {
+  background: white;
+  border-radius: 32px;
+  padding: 28px 22px;
+  width: 340px;
+  text-align: center;
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.popup-code-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0;
+  direction: ltr;
+}
+
+.popup-code-digit {
+  width: 52px;
+  height: 60px;
+  background: var(--orange-pale);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--orange);
+  border: 2px solid rgba(184, 80, 10, 0.2);
+}
+
+.location-status {
+  font-size: 11px;
+  color: var(--text-soft);
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.location-status i {
+  color: var(--orange);
+}
+
+.loading-toast {
+  position: fixed;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 8px 20px;
+  padding: 8px 16px;
   border-radius: 30px;
-  font-size: 13px;
-  z-index: 2000;
+  font-size: 12px;
+  z-index: 1000;
   display: none;
-  white-space: nowrap;
+}
+
+/* ==================== نمط صفحة الورد القرآني ==================== */
+.quran-page {
+  background: var(--quran-bg);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(184, 80, 10, 0.1);
+  text-align: center;
+}
+
+.quran-title {
+  font-family: 'Amiri', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 10px;
+}
+
+.quran-content {
+  font-family: 'Amiri', serif;
+  font-size: 18px;
+  line-height: 2;
+  color: var(--text-dark);
+  margin: 16px 0;
+  text-align: center;
+  direction: rtl;
+}
+
+.quran-ayah {
+  margin: 12px 0;
+  padding: 8px;
+  background: white;
+  border-radius: 12px;
+}
+
+.ayah-number {
+  font-size: 12px;
+  color: var(--orange);
+  font-weight: 700;
+  margin: 0 4px;
+}
+
+.page-number {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-top: 14px;
+  font-weight: 600;
+  padding-top: 10px;
+  border-top: 1px solid #E8DDD0;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.page-nav button {
+  flex: 1;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.page-nav button:active {
+  transform: scale(0.95);
+}
+
+.page-nav button:disabled {
+  background: #CCC;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-mid);
+  font-weight: 600;
+  padding: 10px;
 }
 </style>
 </head>
 <body>
 <div class="phone" id="phone-root">
 
-<!-- الشاشة الافتتاحية -->
+<!-- التدفق المشترك -->
 <div class="system-flow active" id="flow-core">
   <div class="screen active" id="s1">
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 28px;">
-      <div style="background:white;border-radius:40px;padding:40px 50px;margin-bottom:40px;text-align:center;">
+      <div style="background:white;border-radius:40px;padding:40px 54px;margin-bottom:40px;text-align:center;box-shadow:0 24px 70px rgba(184,80,10,0.18);">
         <div style="font-size:72px;font-weight:900;color:var(--orange);">ن</div>
         <div style="font-size:28px;font-weight:800;color:var(--orange);">نفـادل</div>
+        <div style="font-size:13px;color:var(--orange-light);">Nafadil</div>
       </div>
-      <button class="btn-primary" onclick="showScreen('s2')">ابدأ الآن</button>
+      <p style="color:var(--text-mid);font-size:15px;text-align:center;line-height:2;margin-bottom:44px;">
+        حماية أطفالك وتربيتهم بين يديك<br>
+        <span style="font-size:13px;color:var(--text-soft);">بسيط · آمن · ومربٍّ ذكي</span>
+      </p>
+      <button class="btn-primary" onclick="showScreen('s2')"><i class="fas fa-arrow-left"></i> ابدأ الآن</button>
     </div>
   </div>
   <div class="screen" id="s2">
-    <div class="top-header"><div style="font-size:24px;font-weight:800;color:var(--orange);">نفادل</div></div>
+    <div class="top-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="font-size:30px;font-weight:900;color:var(--orange);">ن</div>
+        <div style="font-size:18px;font-weight:700;color:var(--orange);">نفـادل</div>
+      </div>
+    </div>
     <div class="pill-card">
-      <div class="screen-title">مرحباً بك</div>
-      <div class="choice-card" onclick="switchSystem('parent')"><div class="choice-icon"><i class="fas fa-user-tie"></i></div><div><h3>ولي الأمر</h3><p>تحكم وراقب أجهزة أطفالك</p></div></div>
-      <div class="choice-card" onclick="switchSystem('child')"><div class="choice-icon"><i class="fas fa-child"></i></div><div><h3>الابن / البنت</h3><p>ربط جهازك والورد اليومي</p></div></div>
+      <div class="screen-title">مرحباً بك 👋</div>
+      <div class="screen-sub">كيف تريد الدخول؟</div>
+      <div class="choice-card" onclick="switchSystem('parent')">
+        <div class="choice-icon"><i class="fas fa-user-tie"></i></div>
+        <div class="choice-text"><h3>ولي الأمر</h3><p>تحكم وراقب أجهزة أطفالك</p></div>
+        <div class="choice-arrow"><i class="fas fa-chevron-left"></i></div>
+      </div>
+      <div class="choice-card" onclick="switchSystem('child')">
+        <div class="choice-icon"><i class="fas fa-child"></i></div>
+        <div class="choice-text"><h3>الابن / البنت</h3><p>ربط جهازك والورد اليومي</p></div>
+        <div class="choice-arrow"><i class="fas fa-chevron-left"></i></div>
+      </div>
+      <div class="spacer"></div>
+      <p style="text-align:center;font-size:11px;color:var(--text-soft);">نفادل | جميع الحقوق محفوظة</p>
     </div>
   </div>
 </div>
 
-<!-- تدفق ولي الأمر -->
+<!-- تدفق ولي الأمر (محاكاة كاملة) -->
 <div class="system-flow" id="flow-parent">
   <div class="screen" id="s3">
-    <div class="top-header"><button class="back-btn" onclick="exitToMainMenu()">⟳ خروج</button><div style="font-size:20px;font-weight:800;">تسجيل ولي الأمر</div></div>
+    <div class="top-header">
+      <button class="back-btn" onclick="exitToMainMenu()"><i class="fas fa-chevron-left"></i> خروج</button>
+      <div style="color:var(--text-dark);font-size:20px;font-weight:800;">تسجيل ولي الأمر</div>
+      <div style="color:var(--text-soft);font-size:12px;">أدخل رقم جوالك (للتجربة)</div>
+    </div>
     <div class="pill-card">
-      <input class="input-field" id="phone-input" placeholder="0512345678" value="0512345678">
-      <button class="btn-primary" onclick="sendMockOTP()">إرسال رمز التحقق</button>
-      <div class="screen-sub">رمز التجربة: 111111</div>
+      <label class="input-label">رقم الجوال</label>
+      <input class="input-field" id="phone-input" type="tel" placeholder="05xxxxxxxx" maxlength="10" value="0512345678" autocomplete="off">
+      <div class="spacer"></div>
+      <button class="btn-primary" onclick="sendMockOTP()"><i class="fas fa-mobile-alt"></i> إرسال رمز التحقق</button>
+      <p style="text-align:center;font-size:11px;color:var(--text-soft);">رمز التجربة: 111111</p>
     </div>
   </div>
   <div class="screen" id="s4">
-    <div class="top-header"><button class="back-btn" onclick="showScreen('s3')">⟳ رجوع</button></div>
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('s3')"><i class="fas fa-chevron-left"></i> رجوع</button>
+      <div style="color:var(--text-dark);font-size:20px;font-weight:800;">رمز التحقق</div>
+    </div>
     <div class="pill-card">
-      <div class="otp-wrap" id="otp-container"></div>
-      <button class="btn-primary" onclick="verifyMockOTP()">تحقق</button>
-      <button class="btn-outline" onclick="sendMockOTP()">إعادة الإرسال</button>
+      <div class="screen-title">تحقق من جوالك</div>
+      <div class="screen-sub">أدخل الرمز المكون من 6 أرقام</div>
+      <div class="otp-wrap">
+        <input class="otp-box verify-otp" maxlength="1" type="tel">
+        <input class="otp-box verify-otp" maxlength="1" type="tel">
+        <input class="otp-box verify-otp" maxlength="1" type="tel">
+        <input class="otp-box verify-otp" maxlength="1" type="tel">
+        <input class="otp-box verify-otp" maxlength="1" type="tel">
+        <input class="otp-box verify-otp" maxlength="1" type="tel">
+      </div>
+      <button class="btn-primary" onclick="verifyMockOTP()">تحقق وأدخل</button>
+      <button class="btn-outline" onclick="sendMockOTP()">إعادة إرسال الرمز</button>
     </div>
   </div>
   <div class="screen" id="s6">
-    <div style="padding:44px 26px 8px;text-align:center;"><div style="font-size:20px;font-weight:800;">لوحة التحكم</div><div>مرحباً، ولي الأمر</div></div>
-    <div class="pill-card">
-      <div class="scroll-area">
-        <div class="choice-card" onclick="showLinkCode()" style="background:var(--orange);color:white;"><div><i class="fas fa-link"></i> ربط جهاز طفل جديد</div></div>
-        <div class="section-label">📍 موقع الأطفال</div>
-        <div class="map-real"><div id="real-map" style="height:200px;"></div></div>
-        <div class="location-status" onclick="requestLocation()" style="text-align:center;font-size:12px;color:var(--orange);cursor:pointer;">📍 اضغط لمشاركة موقعك الحقيقي</div>
-        <div class="section-label">📱 الأجهزة المرتبطة</div>
-        <div id="devices-list"></div>
-        <div class="choice-card" onclick="openVideoModal()"><div class="choice-icon"><i class="fas fa-play"></i></div><div><h3>فيديو تعليمي</h3></div></div>
-        <button class="btn-primary" onclick="saveSettings()">حفظ الإعدادات</button>
-        <button class="btn-outline" onclick="exitToMainMenu()">تغيير الحساب</button>
+    <div style="background:var(--bg-cream);padding:44px 26px 8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-size:22px;cursor:pointer;color:var(--orange);" onclick="showSupport()"><i class="fas fa-bell"></i></div>
+        <div style="color:var(--text-dark);font-size:16px;font-weight:700;">لوحة التحكم</div>
+        <div style="font-size:26px;font-weight:900;color:var(--orange);">ن</div>
       </div>
+      <div style="color:var(--text-soft);font-size:13px;text-align:center;" id="parent-name">مرحباً، يوسف 👋</div>
+    </div>
+    <div class="pill-card" style="padding-top:14px;">
+      <div class="scroll-area">
+        <div style="background:linear-gradient(135deg,var(--orange),var(--orange-deep));border-radius:22px;padding:18px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:14px;" onclick="showLinkCode()">
+          <div style="width:50px;height:50px;background:rgba(255,255,255,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;"><i class="fas fa-link"></i></div>
+          <div><div style="color:white;font-size:16px;font-weight:800;">ربط جهاز طفل جديد</div><div style="color:rgba(255,255,255,0.72);font-size:11px;">اضغط للحصول على رمز الربط</div></div>
+        </div>
+        <div class="section-label">📍 موقع الأطفال الحقيقي</div>
+        <div class="map-real">
+          <div id="real-map" style="width:100%;height:200px;border-radius:18px;"></div>
+        </div>
+        <div class="location-status" onclick="requestLocation()">
+          <i class="fas fa-location-dot"></i> <span id="location-status-text">اضغط لمشاركة موقعك الحقيقي</span>
+        </div>
+        <div class="section-label">📱 الأجهزة المرتبطة</div>
+        <div id="devices-list">
+          <div class="device-card">
+            <div class="device-avatar"><i class="fas fa-child"></i></div>
+            <div class="device-info"><h4>نورة</h4><p>آيباد — نشط الآن</p></div>
+            <div class="status-badge status-on">نشط</div>
+          </div>
+          <div class="device-card">
+            <div class="device-avatar"><i class="fas fa-child"></i></div>
+            <div class="device-info"><h4>محمد</h4><p>آيفون — مقيّد الآن</p></div>
+            <div class="status-badge status-off">مقيّد</div>
+          </div>
+        </div>
+        <div class="section-label">🎬 شرح الاستخدام</div>
+        <div class="choice-card" onclick="openVideoModal()">
+          <div class="choice-icon"><i class="fas fa-play"></i></div>
+          <div class="choice-text"><h3>فيديو تعليمي</h3><p>كيف تستخدم نفادل</p></div>
+        </div>
+        <div class="section-label">🔔 التنبيهات</div>
+        <div class="notif-badge" onclick="alert('📱 تم إرسال طلب إلى ولي الأمر')">
+          <div class="notif-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="notif-text">نورة طلبت وقتاً إضافياً</div>
+        </div>
+        <div class="notif-badge" onclick="alert('📱 تم تنبيه ولي الأمر')">
+          <div class="notif-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="notif-text">محمد حمّل تطبيقاً جديداً</div>
+        </div>
+        <button class="btn-primary" style="margin-top:14px;" onclick="saveSettings()"><i class="fas fa-cog"></i> حفظ الإعدادات</button>
+        <button class="switch-btn" onclick="exitToMainMenu()"><i class="fas fa-sign-out-alt"></i> تغيير الحساب</button>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item active"><div class="tab-icon"><i class="fas fa-home"></i></div>الرئيسية</div>
+        <div class="tab-item"><div class="tab-icon"><i class="fas fa-chart-bar"></i></div>التقارير</div>
+        <div class="tab-item" onclick="showSupport()"><div class="tab-icon"><i class="fas fa-comments"></i></div>الدعم</div>
+      </div>
+    </div>
+  </div>
+  <div class="screen" id="s10">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('s6')"><i class="fas fa-chevron-left"></i> رجوع</button>
+      <div style="color:var(--text-dark);font-size:20px;font-weight:800;">الشكاوى والاقتراحات</div>
+    </div>
+    <div class="pill-card">
+      <textarea class="feedback-area" id="feedback-text" placeholder="اكتب رسالتك هنا..." rows="5"></textarea>
+      <button class="btn-primary" onclick="sendFeedback()"><i class="fas fa-paper-plane"></i> إرسال</button>
+      <p style="text-align:center;font-size:11px;color:var(--text-soft);margin-top:8px;">شكراً لتواصلك معنا</p>
     </div>
   </div>
 </div>
@@ -667,80 +1135,170 @@ body {
 <!-- تدفق الطفل -->
 <div class="system-flow" id="flow-child">
   <div class="screen" id="s8">
-    <div class="top-header"><button class="back-btn" onclick="exitToMainMenu()">⟳ خروج</button><div style="font-size:20px;font-weight:800;">ربط الجهاز</div></div>
+    <div class="top-header">
+      <button class="back-btn" onclick="exitToMainMenu()"><i class="fas fa-chevron-left"></i> خروج</button>
+      <div style="color:var(--text-dark);font-size:20px;font-weight:800;">ربط الجهاز</div>
+      <div style="color:var(--text-soft);font-size:12px;">أدخل الرمز من ولي الأمر</div>
+    </div>
     <div class="pill-card">
-      <div class="otp-wrap"><input class="otp-box child-otp" maxlength="1"><input class="otp-box child-otp" maxlength="1"><input class="otp-box child-otp" maxlength="1"><input class="otp-box child-otp" maxlength="1"></div>
+      <div class="otp-wrap">
+        <input class="otp-box child-otp" maxlength="1" type="tel">
+        <input class="otp-box child-otp" maxlength="1" type="tel">
+        <input class="otp-box child-otp" maxlength="1" type="tel">
+        <input class="otp-box child-otp" maxlength="1" type="tel">
+      </div>
       <button class="btn-primary" onclick="verifyChildLink()">ربط الجهاز</button>
-      <div class="screen-sub">رمز التجربة: 1234</div>
+      <p style="text-align:center;font-size:11px;color:var(--text-soft);">رمز التجربة: 1234</p>
     </div>
   </div>
   <div class="screen" id="child-dashboard">
-    <div class="child-header"><div class="child-avatar"><i class="fas fa-user-circle"></i></div><div class="child-greeting"><div class="name" id="child-name">نورة 🌸</div></div><div style="color:white;">ن</div></div>
-    <div class="time-section"><div class="time-label">وقتك المتبقي اليوم</div><div class="time-circle-wrap"><svg width="100" height="100"><circle class="time-ring-bg" cx="50" cy="50" r="45"/><circle class="time-ring" cx="50" cy="50" r="45"/></svg><div class="time-center"><div class="time-num">٢:٠٠</div></div></div></div>
-    <div class="status-bar" style="display:flex;gap:10px;padding:0 22px;"><div class="status-pill">⏰ 9:00 م</div><div class="status-pill" id="device-status-pill">✅ مفتوح</div></div>
-    <div class="wird-banner" onclick="openQuranModule()"><div class="wird-banner-icon">📖</div><div><h4>ورد اليوم القرآني</h4><p>اضغط لبدء التلاوة</p></div></div>
+    <div class="child-header">
+      <div class="child-avatar"><i class="fas fa-user-circle"></i></div>
+      <div class="child-greeting"><div class="hi">أهلاً وسهلاً</div><div class="name" id="child-name">نورة 🌸</div></div>
+      <div style="color:white;font-size:26px;font-weight:900;">ن</div>
+    </div>
+    <div class="time-section">
+      <div class="time-label">⏰ وقتك المتبقي اليوم</div>
+      <div class="time-circle-wrap">
+        <svg width="120" height="120" viewBox="0 0 100 100">
+          <circle class="time-ring-bg" cx="50" cy="50" r="45"/>
+          <circle class="time-ring" cx="50" cy="50" r="45"/>
+        </svg>
+        <div class="time-center"><div class="time-num" id="remaining-time">٢:٠٠</div><div class="time-unit">ساعة</div></div>
+      </div>
+    </div>
+    <div class="status-bar">
+      <div class="status-pill"><div class="status-pill-icon"><i class="fas fa-moon"></i></div><div class="status-pill-text"><b>٩:٠٠ م</b>وقت النوم</div></div>
+      <div class="status-pill"><div class="status-pill-icon"><i class="fas fa-check-circle"></i></div><div class="status-pill-text"><b>مفتوح</b>الجهاز</div></div>
+    </div>
+    <div class="wird-banner" onclick="showWirdPage()">
+      <div class="wird-banner-icon">📖</div>
+      <div class="wird-banner-text">
+        <h4>ورد اليوم القرآني</h4>
+        <p>اضغط لبدء الورد</p>
+      </div>
+    </div>
     <div class="apps-label">التطبيقات المسموحة</div>
-    <div class="apps-grid"><div class="app-item"><div class="app-icon" style="background:#FF6B6B;"><i class="fab fa-youtube"></i></div><div class="app-name">يوتيوب</div></div><div class="app-item"><div class="app-icon" style="background:#4ECDC4;"><i class="fas fa-gamepad"></i></div><div class="app-name">ألعاب</div></div><div class="app-item"><div class="app-icon" style="background:#56AB2F;"><i class="fas fa-book"></i></div><div class="app-name">مدرستي</div></div><div class="app-item"><div class="app-icon" style="background:#764ba2;"><i class="fas fa-palette"></i></div><div class="app-name">رسم</div></div></div>
-    <div class="dad-msg"><div>💬</div><div><b>رسالة من أبوك</b><br>ذاكري أولاً وبعدين العب</div></div>
-    <button class="request-btn" onclick="requestExtraTime()">📨 طلب وقت إضافي</button>
-    <div style="padding:16px;"><button class="btn-outline" onclick="exitToMainMenu()">تغيير الحساب</button></div>
+    <div class="apps-grid">
+      <div class="app-item"><div class="app-icon" style="background:linear-gradient(135deg,#FF6B6B,#FF8E53);"><i class="fab fa-youtube"></i></div><div class="app-name">يوتيوب</div></div>
+      <div class="app-item" onclick="alert('⛔ هذا التطبيق مقفل حالياً\nيُفتح بعد إكمال الورد اليومي')"><div class="app-icon" style="background:linear-gradient(135deg,#4ECDC4,#44A08D);"><i class="fas fa-gamepad"></i></div><div class="app-name">ألعاب</div></div>
+      <div class="app-item"><div class="app-icon" style="background:linear-gradient(135deg,#A8E063,#56AB2F);"><i class="fas fa-book"></i></div><div class="app-name">مدرستي</div></div>
+      <div class="app-item"><div class="app-icon" style="background:linear-gradient(135deg,#667eea,#764ba2);"><i class="fas fa-palette"></i></div><div class="app-name">رسم</div></div>
+    </div>
+    <div class="dad-msg">
+      <div style="font-size:22px;color:var(--orange);"><i class="fas fa-comment-dots"></i></div>
+      <div class="dad-msg-text"><b>رسالة من أبوكِ 👨</b><br>ذاكري أولاً وبعدين العب ❤️</div>
+    </div>
+    <button class="request-btn" onclick="requestExtraTime()"><i class="fas fa-hand-paper"></i> طلب وقت إضافي من أبوي</button>
+    <div style="padding:16px 22px;"><button class="switch-btn" onclick="exitToMainMenu()">تغيير الحساب</button></div>
+  </div>
+
+  <!-- صفحة الورد القرآني -->
+  <div class="screen" id="quran-screen">
+    <div class="top-header">
+      <button class="back-btn" onclick="showScreen('child-dashboard')"><i class="fas fa-chevron-left"></i> رجوع</button>
+      <div style="color:var(--text-dark);font-size:20px;font-weight:800;">الورد القرآني</div>
+      <div style="color:var(--text-soft);font-size:12px;">تلاوة يومية مباركة</div>
+    </div>
+    <div class="pill-card" style="padding-top:14px;">
+      <div class="scroll-area">
+        <div id="quran-content"></div>
+      </div>
+      <div class="page-indicator">
+        <span id="current-page-display">الصفحة 1 من 3</span>
+      </div>
+      <div class="page-nav">
+        <button id="prev-btn" onclick="previousQuranPage()"><i class="fas fa-chevron-right"></i> السابق</button>
+        <button id="next-btn" onclick="nextQuranPage()"><i class="fas fa-chevron-left"></i> التالي</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- واجهة القرآن (داخلية) -->
-<div id="quran-screen" style="display:none;flex-direction:column;height:100%;background:linear-gradient(160deg,#1A0A00,#2C1604);">
-  <div style="padding:30px 20px 10px;"><button class="back-btn" style="color:var(--gold-light);" onclick="closeQuranReader()">⟳ رجوع</button><div style="text-align:center;"><div style="font-size:48px;">📖</div><h2 style="color:var(--gold-light);" id="quran-title">سورة الفاتحة</h2><div style="color:#aaa;font-size:12px;" id="quran-period-text">الورد الصباحي</div></div></div>
-  <div class="scroll-area" id="quran-verses-container" style="margin:0 16px;background:rgba(255,255,255,0.05);border-radius:24px;padding:16px;"></div>
-  <div style="padding:16px;display:flex;gap:12px;"><button class="btn-gold" id="play-pause-btn" style="flex:1;" onclick="toggleAudio()">🎧 تشغيل</button><button class="btn-primary" id="complete-btn" style="flex:1;background:var(--green);" onclick="completeWird()">✅ أكملت الورد</button></div>
-  <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 20px 20px;padding:10px;background:rgba(255,255,255,0.1);border-radius:16px;"><div style="display:flex;gap:3px;"><div class="audio-bar"></div><div class="audio-bar"></div><div class="audio-bar"></div><div class="audio-bar"></div></div><span id="audio-status-text" style="font-size:12px;color:var(--gold-light);">جاهز</span></div>
+<!-- فيديو تعليمي -->
+<div class="video-modal" id="video-modal" onclick="closeVideoModal()">
+  <div class="video-modal-content" onclick="event.stopPropagation()">
+    <div class="close-video" onclick="closeVideoModal()">✕</div>
+    <iframe id="youtube-frame" src="https://www.youtube.com/embed/7JTW7NqnU6g?autoplay=1" frameborder="0" allowfullscreen></iframe>
+  </div>
 </div>
 
-<!-- نافذة رمز الربط -->
-<div class="popup-overlay" id="link-popup"><div class="popup-box"><h3>🔗 رمز الربط</h3><div><span class="popup-code-digit">1</span><span class="popup-code-digit">2</span><span class="popup-code-digit">3</span><span class="popup-code-digit">4</span></div><p style="margin-top:10px;">أعط هذا الرمز لطفلك</p><button class="btn-primary" style="margin-top:10px;" onclick="closeLinkPopup()">إغلاق</button></div></div>
+<!-- رمز الربط -->
+<div class="popup-overlay" id="link-popup" onclick="closeLinkPopup(event)">
+  <div class="popup-box">
+    <h3>🔗 رمز ربط الطفل</h3>
+    <div class="popup-code-wrap">
+      <div class="popup-code-digit" id="code-0">1</div>
+      <div class="popup-code-digit" id="code-1">2</div>
+      <div class="popup-code-digit" id="code-2">3</div>
+      <div class="popup-code-digit" id="code-3">4</div>
+    </div>
+    <p style="font-size:12px;margin-top:10px;">الرمز الافتراضي: 1234</p>
+    <button class="btn-primary" style="margin-top:14px;" onclick="closeLinkPopup(null,true)">إغلاق</button>
+  </div>
+</div>
 
-<!-- نافذة الفيديو -->
-<div class="video-modal" id="video-modal" onclick="closeVideoModal()"><div class="video-modal-content"><iframe id="video-frame" src="https://www.youtube.com/embed/7JTW7NqnU6g?autoplay=1" frameborder="0"></iframe></div></div>
+<!-- Toast رسائل -->
+<div id="toast" class="loading-toast"></div>
 
-<div id="toast" class="toast-msg"></div>
 </div>
 
 <script>
-// بيانات الآيات
-const MORNING_AYAH = [
-  "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-  "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-  "الرَّحْمَٰنِ الرَّحِيمِ",
-  "مَالِكِ يَوْمِ الدِّينِ",
-  "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
-  "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
-  "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ"
+// ==================== المتغيرات العامة ====================
+let mockCode = '111111';
+let currentChildName = 'نورة';
+let locationWatchId = null;
+let parentLoggedIn = false;
+let currentQuranPage = 1;
+
+// ==================== بيانات القرآن الكريم ====================
+const quranData = [
+  {
+    title: 'سورة الفاتحة',
+    ayahs: [
+      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+      'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
+      'الرَّحْمَٰنِ الرَّحِيمِ',
+      'مَالِكِ يَوْمِ الدِّينِ',
+      'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',
+      'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',
+      'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ'
+    ]
+  },
+  {
+    title: 'سورة الإخلاص',
+    ayahs: [
+      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+      'قُلْ هُوَ اللَّهُ أَحَدٌ',
+      'اللَّهُ الصَّمَدُ',
+      'لَمْ يَلِدْ وَلَمْ يُولَدْ',
+      'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ'
+    ]
+  },
+  {
+    title: 'سورة الفلق والناس',
+    ayahs: [
+      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+      'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ',
+      'مِن شَرِّ مَا خَلَقَ',
+      'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ',
+      'وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ',
+      'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ',
+      'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
+      'مَلِكِ النَّاسِ',
+      'إِلَٰهِ النَّاسِ',
+      'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ',
+      'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ',
+      'مِنَ الْجِنَّةِ وَالنَّاسِ'
+    ]
+  }
 ];
 
-const EVENING_AYAH = [
-  "قُلْ هُوَ اللَّهُ أَحَدٌ",
-  "اللَّهُ الصَّمَدُ",
-  "لَمْ يَلِدْ وَلَمْ يُولَدْ",
-  "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ"
-];
-
-let currentVerses = [];
-let currentIndex = 0;
-let quranAudio = null;
-let isPlaying = false;
-let locationWatcher = null;
-
-// عرض رسالة Toast
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.style.display = 'block';
-  setTimeout(() => { t.style.display = 'none'; }, 2000);
-}
-
-// التنقل العام
+// ==================== التنقل ====================
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id)?.classList.add('active');
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
 }
 
 function switchSystem(type) {
@@ -748,7 +1306,6 @@ function switchSystem(type) {
   if (type === 'parent') {
     document.getElementById('flow-parent').classList.add('active');
     showScreen('s3');
-    createOtpBoxes();
   } else {
     document.getElementById('flow-child').classList.add('active');
     showScreen('s8');
@@ -756,213 +1313,275 @@ function switchSystem(type) {
 }
 
 function exitToMainMenu() {
-  if (locationWatcher) navigator.geolocation.clearWatch(locationWatcher);
+  if (locationWatchId) navigator.geolocation.clearWatch(locationWatchId);
   document.querySelectorAll('.system-flow').forEach(f => f.classList.remove('active'));
   document.getElementById('flow-core').classList.add('active');
   showScreen('s2');
 }
 
-// OTP للمحاكاة
-function createOtpBoxes() {
-  const container = document.getElementById('otp-container');
-  if (!container || container.children.length) return;
-  for (let i = 0; i < 6; i++) {
-    const input = document.createElement('input');
-    input.type = 'tel';
-    input.maxLength = 1;
-    input.classList.add('otp-box');
-    input.setAttribute('data-otp', '');
-    container.appendChild(input);
-  }
-  const boxes = document.querySelectorAll('#otp-container .otp-box');
-  boxes.forEach((b, idx, arr) => {
-    b.oninput = () => { if (b.value && idx < 5) arr[idx+1].focus(); };
-    b.onkeydown = (e) => { if (e.key === 'Backspace' && !b.value && idx > 0) arr[idx-1].focus(); };
-  });
+function showSupport() {
+  showScreen('s10');
 }
 
+function showToast(message, isError = false) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.style.backgroundColor = isError ? '#C62828' : 'rgba(0,0,0,0.8)';
+  toast.style.display = 'block';
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, 2000);
+}
+
+// ==================== محاكاة OTP (بدون SMS حقيقي) ====================
 function sendMockOTP() {
-  showToast('✅ تم إرسال رمز 111111');
+  const phone = document.getElementById('phone-input').value.trim();
+  if (!phone || phone.length < 10) {
+    showToast('الرجاء إدخال رقم جوال صحيح', true);
+    return;
+  }
+  showToast(`✅ تم إرسال رمز التحقق 111111 إلى ${phone} (محاكاة)`);
   showScreen('s4');
 }
 
 function verifyMockOTP() {
-  const boxes = document.querySelectorAll('#otp-container .otp-box');
-  const code = Array.from(boxes).map(b => b.value).join('');
+  const code = [...document.querySelectorAll('.verify-otp')].map(b => b.value).join('');
   if (code === '111111') {
-    showToast('✅ تم الدخول');
+    showToast('✅ تم التحقق بنجاح');
+    parentLoggedIn = true;
     showScreen('s6');
-    loadDevices();
   } else {
-    showToast('❌ الرمز غير صحيح');
+    showToast('❌ رمز غير صحيح، الرمز الصحيح هو 111111', true);
   }
 }
 
-function loadDevices() {
-  const container = document.getElementById('devices-list');
-  if (container) container.innerHTML = `<div class="device-card"><div class="device-avatar"><i class="fas fa-child"></i></div><div><h4>نورة</h4><p>آيباد — نشط</p></div><div class="status-badge status-on">نشط</div></div><div class="device-card"><div class="device-avatar"><i class="fas fa-child"></i></div><div><h4>محمد</h4><p>آيفون — مقيد</p></div><div class="status-badge status-off">مقيد</div></div>`;
-}
-
-function saveSettings() { showToast('✅ تم حفظ الإعدادات'); }
-
-// ربط الطفل
-function verifyChildLink() {
-  const boxes = document.querySelectorAll('#flow-child .child-otp');
-  const code = Array.from(boxes).map(b => b.value).join('');
-  if (code === '1234') {
-    showToast('✅ تم ربط الجهاز');
-    showScreen('child-dashboard');
+// ==================== الموقع الجغرافي الحقيقي ====================
+function initMockMap() {
+  const mapDiv = document.getElementById('real-map');
+  if (!mapDiv) return;
+  
+  // إنشاء خريطة وهمية بـ Leaflet (مجانية، لا تحتاج API)
+  if (typeof L !== 'undefined') {
+    const map = L.map(mapDiv).setView([24.7136, 46.6753], 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    window.childMap = map;
   } else {
-    showToast('❌ رمز غير صحيح');
+    // خريطة نصية بسيطة
+    mapDiv.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;color:#5C3A1E;"><i class="fas fa-map-marker-alt" style="font-size:40px;margin-bottom:10px;"></i><span>خريطة الموقع</span><span style="font-size:11px;">اضغط لمشاركة موقعك</span></div>';
   }
 }
 
-function requestExtraTime() { showToast('📨 تم إرسال طلب وقت إضافي'); }
+function requestLocation() {
+  if (!navigator.geolocation) {
+    showToast('❌ المتصفح لا يدعم تحديد الموقع', true);
+    return;
+  }
+  
+  const statusSpan = document.getElementById('location-status-text');
+  statusSpan.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحصول على الموقع...';
+  
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      statusSpan.innerHTML = `<i class="fas fa-location-dot"></i> الموقع: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+      showToast(`📍 تم تحديث موقعك: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+      
+      // تحديث الخريطة إذا كانت Leaflet موجودة
+      if (window.childMap && typeof L !== 'undefined') {
+        const center = [lat, lng];
+        window.childMap.setView(center, 15);
+        if (window.currentMarker) window.childMap.removeLayer(window.currentMarker);
+        window.currentMarker = L.marker(center).addTo(window.childMap)
+          .bindPopup('📍 موقعك الحالي').openPopup();
+      }
+      
+      // مراقبة الموقع
+      if (locationWatchId) navigator.geolocation.clearWatch(locationWatchId);
+      locationWatchId = navigator.geolocation.watchPosition(
+        (pos) => {
+          const newLat = pos.coords.latitude;
+          const newLng = pos.coords.longitude;
+          statusSpan.innerHTML = `<i class="fas fa-location-dot"></i> محدث: ${newLat.toFixed(4)}`;
+          if (window.childMap && typeof L !== 'undefined') {
+            window.childMap.setView([newLat, newLng], 15);
+            if (window.currentMarker) window.childMap.removeLayer(window.currentMarker);
+            window.currentMarker = L.marker([newLat, newLng]).addTo(window.childMap);
+          }
+        },
+        (err) => console.log('خطأ في تحديث الموقع:', err),
+        { enableHighAccuracy: true }
+      );
+    },
+    (error) => {
+      let msg = '❌ لا يمكن تحديد الموقع';
+      if (error.code === 1) msg = '❌ الرجاء السماح بتحديد الموقع';
+      statusSpan.innerHTML = `<i class="fas fa-location-dot"></i> ${msg}`;
+      showToast(msg, true);
+    }
+  );
+}
 
-// رمز الربط
+// ==================== رمز الربط ====================
 function showLinkCode() {
   document.getElementById('link-popup').classList.add('active');
 }
-function closeLinkPopup() {
-  document.getElementById('link-popup').classList.remove('active');
-}
 
-// الفيديو
-function openVideoModal() {
-  document.getElementById('video-modal').classList.add('active');
-}
-function closeVideoModal() {
-  document.getElementById('video-modal').classList.remove('active');
-}
-
-// الموقع الجغرافي الحقيقي
-function requestLocation() {
-  if (!navigator.geolocation) { showToast('المتصفح لا يدعم الموقع'); return; }
-  navigator.geolocation.getCurrentPosition(pos => {
-    const lat = pos.coords.latitude, lng = pos.coords.longitude;
-    showToast(`📍 موقعك: ${lat.toFixed(4)}`);
-    if (window.childMap) {
-      window.childMap.setView([lat, lng], 14);
-      L.marker([lat, lng]).addTo(window.childMap).bindPopup('موقعك الحالي').openPopup();
-    }
-    if (locationWatcher) navigator.geolocation.clearWatch(locationWatcher);
-    locationWatcher = navigator.geolocation.watchPosition(p => {
-      if (window.childMap) window.childMap.setView([p.coords.latitude, p.coords.longitude], 14);
-    }, null, { enableHighAccuracy: true });
-  }, () => showToast('الرجاء السماح بتحديد الموقع'));
-}
-
-// تحميل الخريطة
-function loadMap() {
-  if (typeof L === 'undefined') return;
-  const mapDiv = document.getElementById('real-map');
-  if (!mapDiv) return;
-  const map = L.map(mapDiv).setView([24.7136, 46.6753], 12);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '' }).addTo(map);
-  window.childMap = map;
-}
-
-// ========== نظام القرآن المباشر ==========
-function openQuranModule() {
-  const period = new Date().getHours() >= 6 && new Date().getHours() < 18 ? 'morning' : 'evening';
-  currentVerses = period === 'morning' ? [...MORNING_AYAH] : [...EVENING_AYAH];
-  currentIndex = 0;
-  
-  document.getElementById('quran-title').textContent = period === 'morning' ? 'سورة الفاتحة' : 'سورة الإخلاص';
-  document.getElementById('quran-period-text').textContent = period === 'morning' ? 'الورد الصباحي 🌅' : 'الورد المسائي 🌙';
-  
-  const container = document.getElementById('quran-verses-container');
-  container.innerHTML = '';
-  currentVerses.forEach((verse, i) => {
-    const div = document.createElement('div');
-    div.className = 'verse-line';
-    div.textContent = verse;
-    div.onclick = () => playVerse(i);
-    container.appendChild(div);
-  });
-  
-  document.getElementById('quran-screen').style.display = 'flex';
-  document.querySelectorAll('.system-flow .screen').forEach(s => s.classList.remove('active'));
-  playVerse(0);
-}
-
-function playVerse(index) {
-  if (index >= currentVerses.length) { completeWird(); return; }
-  currentIndex = index;
-  
-  // تحديث الواجهة
-  document.querySelectorAll('#quran-verses-container .verse-line').forEach((line, i) => {
-    line.classList.remove('active', 'completed');
-    if (i === index) line.classList.add('active');
-  });
-  
-  if (quranAudio) { quranAudio.pause(); quranAudio = null; }
-  
-  const suraNum = (document.getElementById('quran-title').textContent === 'سورة الفاتحة') ? '001' : '112';
-  const ayahNum = (index + 1).toString().padStart(3, '0');
-  const audioUrl = `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${suraNum}${ayahNum}.mp3`;
-  
-  quranAudio = new Audio(audioUrl);
-  quranAudio.onplay = () => {
-    isPlaying = true;
-    document.getElementById('audio-status-text').textContent = '🎵 يتلو القرآن...';
-    document.getElementById('play-pause-btn').textContent = '⏸ إيقاف';
-  };
-  quranAudio.onended = () => {
-    document.querySelectorAll('#quran-verses-container .verse-line')[index]?.classList.add('completed');
-    playVerse(index + 1);
-  };
-  quranAudio.onerror = () => {
-    // إذا فشل الصوت، نكمل بالقراءة الصامتة
-    document.getElementById('audio-status-text').textContent = '📖 وضع القراءة الصامتة';
-    setTimeout(() => {
-      document.querySelectorAll('#quran-verses-container .verse-line')[index]?.classList.add('completed');
-      playVerse(index + 1);
-    }, 2500);
-  };
-  quranAudio.play().catch(() => {
-    document.getElementById('audio-status-text').textContent = '⚠️ اضغط على الآية لتأكيد القراءة';
-  });
-}
-
-function toggleAudio() {
-  if (!quranAudio) return;
-  if (isPlaying) {
-    quranAudio.pause();
-    isPlaying = false;
-    document.getElementById('audio-status-text').textContent = '⏸ متوقف';
-    document.getElementById('play-pause-btn').textContent = '🎧 تشغيل';
-  } else {
-    quranAudio.play();
-    isPlaying = true;
-    document.getElementById('audio-status-text').textContent = '🎵 جاري التلاوة';
-    document.getElementById('play-pause-btn').textContent = '⏸ إيقاف';
+function closeLinkPopup(e, force) {
+  if (force || (e && e.target === document.getElementById('link-popup'))) {
+    document.getElementById('link-popup').classList.remove('active');
   }
 }
 
-function completeWird() {
-  if (quranAudio) { quranAudio.pause(); quranAudio = null; }
-  isPlaying = false;
-  document.getElementById('quran-screen').style.display = 'none';
-  document.getElementById('child-dashboard').classList.add('active');
-  showToast('🎉 أحسنت! تم فتح جهازك');
+// ==================== ربط الطفل ====================
+function verifyChildLink() {
+  const code = [...document.querySelectorAll('.child-otp')].map(b => b.value).join('');
+  if (code === '1234') {
+    const childName = prompt('أدخل اسم الطفل:', 'نورة');
+    if (childName) currentChildName = childName;
+    document.getElementById('child-name').textContent = currentChildName + ' 🌸';
+    showToast('✅ تم ربط الجهاز بنجاح');
+    showScreen('child-dashboard');
+  } else {
+    showToast('❌ رمز غير صحيح، الرمز الصحيح هو 1234', true);
+  }
 }
 
-function closeQuranReader() {
-  if (quranAudio) { quranAudio.pause(); quranAudio = null; }
-  isPlaying = false;
-  document.getElementById('quran-screen').style.display = 'none';
-  document.getElementById('child-dashboard').classList.add('active');
+// ==================== وظائف الورد القرآني ====================
+function showWirdPage() {
+  currentQuranPage = 1;
+  renderQuranPage();
+  showScreen('quran-screen');
 }
 
-// تهيئة الخريطة عند التحميل
-setTimeout(() => {
-  loadMap();
+function renderQuranPage() {
+  if (currentQuranPage < 1 || currentQuranPage > quranData.length) {
+    currentQuranPage = 1;
+  }
+  
+  const pageData = quranData[currentQuranPage - 1];
+  const container = document.getElementById('quran-content');
+  
+  let html = `<div class="quran-page">
+    <div class="quran-title">${pageData.title}</div>
+    <div class="quran-content">`;
+  
+  pageData.ayahs.forEach((ayah, index) => {
+    html += `<div class="quran-ayah">
+      ${ayah}
+      <span class="ayah-number">[${index + 1}]</span>
+    </div>`;
+  });
+  
+  html += `</div>
+    <div class="page-number">الصفحة رقم: ${currentQuranPage}</div>
+  </div>`;
+  
+  container.innerHTML = html;
+  
+  // تحديث أزرار التنقل
+  document.getElementById('prev-btn').disabled = currentQuranPage === 1;
+  document.getElementById('next-btn').disabled = currentQuranPage === quranData.length;
+  
+  // تحديث مؤشر الصفحة
+  document.getElementById('current-page-display').textContent = `الصفحة ${currentQuranPage} من ${quranData.length}`;
+}
+
+function nextQuranPage() {
+  if (currentQuranPage < quranData.length) {
+    currentQuranPage++;
+    renderQuranPage();
+  }
+}
+
+function previousQuranPage() {
+  if (currentQuranPage > 1) {
+    currentQuranPage--;
+    renderQuranPage();
+  }
+}
+
+// ==================== وظائف الطفل ====================
+function requestExtraTime() {
+  showToast('📨 تم إرسال طلب وقت إضافي إلى ولي الأمر');
+}
+
+// ==================== الإعدادات والدعم ====================
+function saveSettings() {
+  showToast('✅ تم حفظ الإعدادات بنجاح');
+}
+
+function sendFeedback() {
+  const text = document.getElementById('feedback-text')?.value;
+  if (text) {
+    showToast('✅ تم إرسال رسالتك بنجاح، شكراً لك');
+    document.getElementById('feedback-text').value = '';
+  } else {
+    showToast('الرجاء كتابة رسالتك أولاً', true);
+  }
+}
+
+function openVideoModal() {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('youtube-frame');
+  iframe.src = 'https://www.youtube.com/embed/7JTW7NqnU6g?autoplay=1';
+  modal.classList.add('active');
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('youtube-frame');
+  iframe.src = '';
+  modal.classList.remove('active');
+}
+
+// ==================== OTP Boxes Setup ====================
+function setupOtpBoxes(className) {
+  const boxes = document.querySelectorAll(className);
+  boxes.forEach((box, idx, arr) => {
+    box.addEventListener('input', (e) => {
+      box.value = box.value.replace(/\D/g, '').slice(0, 1);
+      if (box.value && idx < arr.length - 1) arr[idx + 1].focus();
+    });
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !box.value && idx > 0) arr[idx - 1].focus();
+    });
+  });
+}
+
+// ==================== تحميل Leaflet (خريطة مجانية) ====================
+function loadLeaflet() {
+  if (document.querySelector('link[href*="leaflet"]')) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(link);
   const script = document.createElement('script');
   script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-  script.onload = loadMap;
+  script.onload = () => initMockMap();
   document.head.appendChild(script);
-}, 100);
+}
+
+// ==================== التهيئة ====================
+function init() {
+  setupOtpBoxes('.verify-otp');
+  setupOtpBoxes('.child-otp');
+  loadLeaflet();
+  
+  // تعبئة رمز الـ OTP تلقائياً للتجربة
+  const mockOtpBoxes = document.querySelectorAll('.verify-otp');
+  if (mockOtpBoxes.length === 6) {
+    const mockDigits = '111111'.split('');
+    mockOtpBoxes.forEach((box, i) => {
+      if (mockDigits[i]) box.value = mockDigits[i];
+    });
+  }
+}
+
+init();
 </script>
+
 </body>
 </html>
